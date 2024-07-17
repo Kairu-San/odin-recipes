@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Homepage</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head>
-    <body>
-        <h1 class="index"><a class="meme" href="meme.html">Kyle</a> Recipes</h1>
-        <div class="list">
-            <button class="index"><a href="recipes/adobo.html">Adobo</a></button><br>
-            <button class="index"><a href="recipes/tinola.html">Tinola</a></button><br>
-            <button class="index"><a href="recipes/kare-kare.html">Kare-Kare</a></button>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+    <!-- Audio element for initial play (hidden) -->
+    <audio id="bgmusic" autoplay loop>
+        <source src="./music/rickroll.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1 class="index"><a class="meme" href="#overlay" onclick="playOverlayMusic()">Kyle Recipes</a></h1>
+    <div class="list">
+        <button class="index"><a href="recipes/adobo.html">Adobo</a></button><br>
+        <button class="index"><a href="recipes/tinola.html">Tinola</a></button><br>
+        <button class="index"><a href="recipes/kare-kare.html">Kare-Kare</a></button>
+    </div>
+    <div class="meme">Click on Kyle Recipes for help!</div>
+
+    <!-- Overlay content -->
+    <div id="overlay" class="overlay">
+        <a href="#" class="close" onclick="stopOverlayMusic()">&times;</a>
+        <img src="./img/rickroll.gif" alt="Rickroll">
+        <!-- Audio element inside overlay for manual play -->
+        <audio id="overlayMusic" loop autoplay>
+            <source src="./music/rickroll.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Script to control audio playback -->
+    <script>
+        // Function to play overlay music
+        function playOverlayMusic() {
+            var audio = document.getElementById('overlayMusic');
+            audio.play();
+        }
+
+        // Function to stop overlay music
+        function stopOverlayMusic() {
+            var audio = document.getElementById('overlayMusic');
+            audio.pause();
+            audio.currentTime = 0; // Reset audio to beginning
+        }
+
+        // Stop initial music playback when overlay is opened
+        document.querySelector('.meme').addEventListener('click', function() {
+            document.getElementById('bgmusic').pause();
+        });
+    </script>
+    
+</body>
 </html>
